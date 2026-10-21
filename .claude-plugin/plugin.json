@@ -9,6 +9,7 @@
   "homepage": "https://app.skaldkeep.gg",
   "repository": "https://github.com/kastruppro/skaldkeep-skills",
   "icon": "./assets/icon.png",
+  "privacyPolicyUrl": "https://skaldkeep.gg/privacy",
   "license": "MIT",
   "keywords": [
     "skaldkeep",

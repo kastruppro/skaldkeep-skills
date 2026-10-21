@@ -20,7 +20,7 @@
   "interface": {
     "displayName": "Skaldkeep",
     "shortDescription": "Campaign chronicle skills for TTRPG groups",
-    "longDescription": "Turn session transcripts into staged Skaldkeep campaign documents, transcribe recordings with AssemblyAI, write recap songs and keep filter values tidy. The MCP server itself is configured in config.toml with bearer_token_env_var = \"SKALDKEEP_TOKEN\" (see the skaldkeep-connect skill).",
+    "longDescription": "Turn session transcripts into staged Skaldkeep campaign documents, transcribe recordings with AssemblyAI, write recap songs and keep filter values tidy. This plugin ships the skills only: the Skaldkeep MCP server must be set up separately. If the Skaldkeep tools are missing, ask Codex to \"connect to Skaldkeep\" (the skaldkeep-connect skill), or add it with: codex mcp add skaldkeep --url https://app.skaldkeep.gg/mcp --bearer-token-env-var SKALDKEEP_TOKEN",
     "developerName": "Skaldkeep",
     "category": "Productivity",
     "capabilities": [
@@ -34,6 +34,7 @@
     ],
     "websiteURL": "https://app.skaldkeep.gg",
     "logo": "./assets/icon.png",
-    "composerIcon": "./assets/icon.png"
+    "composerIcon": "./assets/icon.png",
+    "privacyPolicyURL": "https://skaldkeep.gg/privacy"
   }
 }

@@ -51,6 +51,11 @@ access token. The token is stored in secure storage, not in `settings.json`. Cha
 in `/config`. Use either the plugin or the `skills` CLI for Claude Code, not both, or the skills
 appear twice.
 
+### Codex: the plugin manifest
+
+`.codex-plugin/plugin.json` lets Codex load this repo as a plugin, but it ships the skills only.
+Set up the MCP server separately (see below, or ask Codex to "connect to Skaldkeep").
+
 ### Manually
 
 Copy the folders you want from `skills/` into your agent's skills directory, for example
@@ -90,6 +95,8 @@ Self-hosted instance? Use your own base URL plus `/mcp`.
 The skills send campaign content only to the Skaldkeep instance you connect, and - for local
 transcription - audio to AssemblyAI. Transcripts are written outside any repository by
 default. Never commit tokens, transcripts or campaign files.
+
+See the [Skaldkeep privacy policy](https://skaldkeep.gg/privacy).
 
 ## Repository layout
 
