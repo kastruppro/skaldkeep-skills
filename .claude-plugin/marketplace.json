@@ -1,0 +1,14 @@
+{
+  "name": "skaldkeep-skills",
+  "description": "Skaldkeep campaign chronicle: MCP connection and skills for Claude Code.",
+  "owner": {
+    "name": "Skaldkeep"
+  },
+  "plugins": [
+    {
+      "name": "skaldkeep",
+      "source": "./",
+      "description": "Skaldkeep MCP connection plus skills for connecting, using the tools, processing sessions, local transcription, recap songs and facet cleanup."
+    }
+  ]
+}

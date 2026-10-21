@@ -1,0 +1,47 @@
+{
+  "name": "skaldkeep",
+  "displayName": "Skaldkeep",
+  "version": "0.1.0",
+  "description": "Connect Claude Code to a Skaldkeep campaign chronicle over MCP, with skills for processing session transcripts, local transcription, recap songs and facet cleanup.",
+  "author": {
+    "name": "Skaldkeep"
+  },
+  "homepage": "https://app.skaldkeep.gg",
+  "repository": "https://github.com/kastruppro/skaldkeep-skills",
+  "icon": "./assets/icon.png",
+  "license": "MIT",
+  "keywords": [
+    "skaldkeep",
+    "ttrpg",
+    "dnd",
+    "mcp",
+    "campaign",
+    "transcription"
+  ],
+  "skills": "./skills/",
+  "userConfig": {
+    "server_url": {
+      "type": "string",
+      "title": "Skaldkeep server URL",
+      "description": "Base URL of your Skaldkeep instance without a trailing slash, e.g. https://app.skaldkeep.gg",
+      "default": "https://app.skaldkeep.gg",
+      "required": true
+    },
+    "access_token": {
+      "type": "string",
+      "title": "Personal access token",
+      "description": "A token (skp_...) created in Skaldkeep under Settings > Access tokens.",
+      "required": true,
+      "sensitive": true
+    }
+  },
+  "mcpServers": {
+    "skaldkeep": {
+      "type": "http",
+      "url": "${user_config.server_url}/mcp",
+      "headers": {
+        "Authorization": "Bearer ${user_config.access_token}"
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "skaldkeep": {
+      "type": "http",
+      "url": "${SKALDKEEP_URL:-https://app.skaldkeep.gg}/mcp",
+      "headers": {
+        "Authorization": "Bearer ${SKALDKEEP_TOKEN}"
+      }
+    }
+  }
+}

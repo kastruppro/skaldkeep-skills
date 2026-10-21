@@ -1,0 +1,5 @@
+# Skaldkeep MCP for Codex. The token is read at runtime from the SKALDKEEP_TOKEN
+# environment variable: bearer_token_env_var holds the variable NAME, never the token.
+[mcp_servers.skaldkeep]
+url = "https://app.skaldkeep.gg/mcp"
+bearer_token_env_var = "SKALDKEEP_TOKEN"
