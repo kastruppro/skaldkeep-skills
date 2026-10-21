@@ -1,0 +1,44 @@
+# Copy to ~/.config/skaldkeep/transcribe/campaigns/<your-campaign>.yaml and edit it for
+# your table (never inside the skill folder - updates replace it). Then:
+#   scripts/run.sh <audio> --campaign <your-campaign>
+name: Example Campaign
+language_code: en_us # da for Danish; auto for mixed-language recordings
+
+# Human participants, including the GM. Use --absent Player1 for one session.
+speakers_expected: 4
+speaker_names:
+  - GM
+  - Player1
+  - Player2
+  - Player3
+# Optional aliases map a human name to a participant label already listed above.
+# speaker_aliases:
+#   Alex: Player1
+
+# Updated method: describe context; behavior/format instructions are ignored.
+context_prompt: >-
+  A Dungeons and Dragons session with a game master and players. They describe
+  actions, discuss rules, roll dice and perform in-character dialogue. The
+  conversation includes fantasy names, places, factions and spells.
+
+# Add exact names relevant to your campaign. At most six words per phrase,
+# and 1,000 words in total. Hints do not guarantee spelling.
+keyterms_prompt: []
+
+# Baseline fields for --method legacy. Keep your existing values when migrating
+# to compare the old recipe; both methods run on Universal-3.5-Pro.
+prompt: >-
+  A Dungeons and Dragons tabletop roleplaying session with fantasy names and places.
+custom_spelling: []
+
+# Optional updated_custom_spelling applies post-recognition replacements in the
+# updated method. Avoid replacing ordinary words with character names.
+# updated_custom_spelling:
+#   - from: [MisheardName]
+#     to: CorrectName
+
+# Identification is off in the updated method unless --identify is passed.
+# Names require evidence in the conversation; metadata is a hint, not proof.
+# speaker_metadata:
+#   GM:
+#     description: Runs the game, describes locations, and portrays multiple NPCs.

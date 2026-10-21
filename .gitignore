@@ -5,12 +5,11 @@
 
 # Transcription output and private campaign material must never land here.
 # The transcriber writes outside the repo by default; these are a safety net.
-output/
-skaldkeep-transcripts/
+/output/
 skills/skaldkeep-transcribe-local/scripts/output/
 skills/skaldkeep-transcribe-local/scripts/campaigns/*
 !skills/skaldkeep-transcribe-local/scripts/campaigns/example.yaml
-campaigns/
+/campaigns/
 
 # Python
 __pycache__/
