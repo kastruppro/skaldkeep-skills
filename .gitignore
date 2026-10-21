@@ -1,0 +1,24 @@
+# Secrets and environment - never commit
+.env
+.env.*
+!.env.example
+
+# Transcription output and private campaign material must never land here.
+# The transcriber writes outside the repo by default; these are a safety net.
+output/
+skaldkeep-transcripts/
+skills/skaldkeep-transcribe-local/scripts/output/
+skills/skaldkeep-transcribe-local/scripts/campaigns/*
+!skills/skaldkeep-transcribe-local/scripts/campaigns/example.yaml
+campaigns/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# OS / editor
+.DS_Store
+*.swp
