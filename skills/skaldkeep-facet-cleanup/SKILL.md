@@ -21,6 +21,13 @@ sessions the same value drifts into several spellings - `mistvale` and `Mistvale
 `Harrowgate (docks area)` instead of the `harrowgate` slug - and the filter splits. This
 skill merges them in one reviewable, atomic change.
 
+**First, check the MCP connection.** This skill needs Skaldkeep's MCP tools (`list_campaigns`,
+`get_my_access`, ...). If they are not available, the MCP server is not set up yet: stop and
+tell the user, then set it up with the **skaldkeep-connect** skill. If that skill is not
+installed: the server is `https://app.skaldkeep.gg/mcp` (or the user's own instance + `/mcp`),
+Streamable HTTP, header `Authorization: Bearer <token>`, with a token created under
+Settings > Access tokens and kept in the `SKALDKEEP_TOKEN` environment variable.
+
 ## Step 1 - Confirm access and pick the type
 
 Call `get_my_access(campaign_slug=<ref>)` first. Reading needs `read_player_content`;

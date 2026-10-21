@@ -17,7 +17,14 @@ license: MIT
 
 One run turns one game session into staged campaign documents through Skaldkeep's MCP tools.
 The rules in the **skaldkeep-usage** skill apply throughout (staging, visibility, `dm_notes`,
-revisions). If Skaldkeep tools are missing, use **skaldkeep-connect** first.
+revisions).
+
+**First, check the MCP connection.** This skill needs Skaldkeep's MCP tools (`list_campaigns`,
+`get_my_access`, ...). If they are not available, the MCP server is not set up yet: stop and
+tell the user, then set it up with the **skaldkeep-connect** skill. If that skill is not
+installed: the server is `https://app.skaldkeep.gg/mcp` (or the user's own instance + `/mcp`),
+Streamable HTTP, header `Authorization: Bearer <token>`, with a token created under
+Settings > Access tokens and kept in the `SKALDKEEP_TOKEN` environment variable.
 
 Create a todo per step below and work through them in order.
 

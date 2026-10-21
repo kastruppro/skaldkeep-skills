@@ -17,8 +17,14 @@ license: MIT
 
 Skaldkeep stores a campaign as markdown documents with frontmatter and `[[slug]]` wiki-links.
 Every write goes through the same service layer as the web app: it creates a revision, updates
-the link graph and enforces visibility. If no Skaldkeep tools are available, use the
-**skaldkeep-connect** skill first.
+the link graph and enforces visibility.
+
+**First, check the MCP connection.** This skill needs Skaldkeep's MCP tools (`list_campaigns`,
+`get_my_access`, ...). If they are not available, the MCP server is not set up yet: stop and
+tell the user, then set it up with the **skaldkeep-connect** skill. If that skill is not
+installed: the server is `https://app.skaldkeep.gg/mcp` (or the user's own instance + `/mcp`),
+Streamable HTTP, header `Authorization: Bearer <token>`, with a token created under
+Settings > Access tokens and kept in the `SKALDKEEP_TOKEN` environment variable.
 
 ## Start of every task
 

@@ -20,6 +20,15 @@ first. The full method - narrative techniques, lyric review, Suno models, settin
 mashups - is in [references/suno-guide.md](references/suno-guide.md). Read it before writing
 lyrics.
 
+**First, check the MCP connection.** This skill needs Skaldkeep's MCP tools (`list_campaigns`,
+`get_my_access`, ...). If they are not available, the MCP server is not set up yet: stop and
+tell the user, then set it up with the **skaldkeep-connect** skill. If that skill is not
+installed: the server is `https://app.skaldkeep.gg/mcp` (or the user's own instance + `/mcp`),
+Streamable HTTP, header `Authorization: Bearer <token>`, with a token created under
+Settings > Access tokens and kept in the `SKALDKEEP_TOKEN` environment variable. Without a
+connection you can still write the event list, concepts and Suno packages from material the
+user provides; only reading the campaign and storing the recap need MCP.
+
 ## Step 1 - Gather the session
 
 - Campaign `ref` and session slug. Use `get_document(campaign_slug, slug="session-12")` and
