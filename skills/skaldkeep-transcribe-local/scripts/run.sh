@@ -16,18 +16,19 @@ if ! command -v uv >/dev/null 2>&1; then
     exit 1
 fi
 
+KEY_NAME=ASSEMBLYAI_API_KEY
 if [ -z "${ASSEMBLYAI_API_KEY:-}" ] && [ -f .env ]; then
     while IFS= read -r line || [ -n "$line" ]; do
         case "$line" in
-            ASSEMBLYAI_API_KEY=*) ;;
+            "$KEY_NAME"=*) ;;
             *) continue ;;
         esac
-        val=${line#ASSEMBLYAI_API_KEY=}
+        val=${line#"$KEY_NAME"=}
         case "$val" in
             \"*\") val=${val#\"}; val=${val%\"} ;;
             \'*\') val=${val#\'}; val=${val%\'} ;;
         esac
-        export ASSEMBLYAI_API_KEY="$val"
+        export "$KEY_NAME"="$val"
     done < .env
 fi
 
