@@ -72,6 +72,11 @@ Settings > Access tokens and kept in the `SKALDKEEP_TOKEN` environment variable.
 A conflict error on `base_revision_id` means the document changed since you read it: read it
 again, merge, retry. Never drop the revision check to force a write.
 
+If the document has a pending draft, `upsert_document` replaces the draft, not the live page:
+read it with `get_document(draft=true)`, merge into that content, and pass its
+`draft_revision_id` as `expected_draft_revision_id` (plus `base_revision_id`). A draft in
+another batch, or a `stale` one, must be reviewed in the web app first.
+
 ## Visibility and privacy
 
 | `visibility` | Who sees it | Writing it needs |

@@ -165,7 +165,8 @@ Only on a yes, continue with the **skaldkeep-songs** skill.
 - Without `sees_dm_content` never send `visibility="dm_only"`; without `sees_dm_notes` never
   send `dm_notes`. Secrets go in `dm_notes` or hidden docs, never a player-visible body.
 - Never copy `personal` documents or private wishes into campaign-visible text.
-- Pass `base_revision_id` on full rewrites of existing documents.
+- Pass `base_revision_id` on full rewrites of existing documents, and `expected_draft_revision_id`
+  when the document has a pending draft.
 - Slugs lowercase-hyphenated; link with `[[slug]]`; fix wrong slugs with `rename_document`.
 - Facts only from the transcript and existing canon; keep uncertainty uncertain.
 - Plain hyphens, no em/en dashes.

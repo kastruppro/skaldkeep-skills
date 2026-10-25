@@ -80,9 +80,12 @@ changes when you need to check them.
 ### Bodies and replacements
 
 - Append-only narrative changes: `append_to_document`.
-- True body replacement: first make sure no draft is pending (`get_document(draft=true)` or
-  `list_staging`), then read the document and send a complete merge that preserves untargeted
-  frontmatter, title, type, visibility and private fields, with `base_revision_id`.
+- True body replacement: check for a pending draft with `get_document(draft=true)` (the error
+  "document has no pending draft" means there is none). Without one, read the document and
+  send a complete merge that preserves untargeted frontmatter, title, type, visibility and
+  private fields, with `base_revision_id`. With one in this run's batch, merge into the draft
+  content and also pass its `draft_revision_id` as `expected_draft_revision_id`. A draft in
+  another batch, or a `stale` one, goes to the DM.
 - Resolve `[[links]]` by writing the linked documents too. Unresolved links appear as wanted
   pages (`get_link_graph`).
 
