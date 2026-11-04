@@ -31,7 +31,11 @@ Create a todo per step below and work through them in order.
 ## Step 1 - Find the transcript (server first)
 
 **Server transcript (preferred).** The DM uploads the recording on the web app's Transcripts
-page and Skaldkeep transcribes it.
+page and Skaldkeep transcribes it. A session recorded in Skaldkeep Live is not transcribed
+automatically: the DM downloads the table-mic file from the recordings list under Recent
+sessions on the Live page and uploads it there (or uses **skaldkeep-transcribe-local**). Live
+gives one file per microphone, and the Transcripts page joins several files in order, so
+parallel mic files must never be uploaded together as one recording.
 
 ```
 list_transcripts(campaign_slug=<ref>, unprocessed_only=true)

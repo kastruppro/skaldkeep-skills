@@ -54,6 +54,11 @@ Show the user the planned speaker count and `estimated_max_usd`. The default cap
 (`--max-cost-usd`). Several files for one session: transcribe each, or join them first only
 if they are one continuous recording.
 
+A session recorded in Skaldkeep Live gives one Ogg/Opus file per microphone (the table mic and
+each remote player's own mic), downloaded from the recordings list under Recent sessions on the Live page. These are
+parallel tracks with the pauses cut out, not consecutive parts: never join them. Transcribe the
+table-mic file for an in-person table; ask the user before transcribing other mics as well.
+
 ## Step 3 - Transcribe (in the background)
 
 Run the same command without `--dry-run` as a background job; sessions take minutes. Keep
