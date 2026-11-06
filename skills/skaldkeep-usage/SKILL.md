@@ -115,8 +115,11 @@ another batch, or a `stale` one, must be reviewed in the web app first.
   (`get_link_graph`).
 - Slug-reference frontmatter (`location`, `faction`, `holder`, `owner`, `party`, `npcs`, ...)
   holds slugs, not titles.
-- Images: `upload_media`, then embed `![[<returned filename>]]` - a name collision returns a
-  different filename. Recap audio is uploaded by a human in the web app.
+- Media (images, audio, PDF, MP4/WebM video, max 50 MB): `upload_media` (base64) for small
+  files; `create_media_upload` + `curl -T` with a shell, or `import_media_from_url` without one,
+  for anything larger. Embed `![[<returned filename>]]` - a name collision returns a different
+  filename. Attach recap audio with `upsert_recap(audio_media_id=...)`. Read media with
+  `list_media` / `get_media` (signed download links).
 - Bodies use H2 sections (`## Summary`, `## Events`); the app builds navigation from them.
 - Use plain hyphens rather than em/en dashes in text you write.
 - Use only tools the connected server lists. A missing tool means an older server: do the

@@ -8,7 +8,7 @@ Respect the group's standing style preferences and exclusions (see `references/s
 It is a working document (keep local, or store as a `personal` `note`). The finished
 lyrics become a Skaldkeep **`song`** recap:
 `upsert_recap(campaign_slug=<ref>, session_slug="session-xx", kind="song", title="<song title>", text="<lyrics>")`.
-Audio is uploaded by a human in the web app afterwards.
+Attach the audio afterwards with `upsert_recap(recap_id=..., audio_media_id=...)` once it is uploaded (see the skill's Step 6).
 
 ## Skeleton
 

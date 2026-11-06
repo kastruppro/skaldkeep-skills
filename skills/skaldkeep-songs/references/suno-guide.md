@@ -250,6 +250,6 @@ altered names, repeated verses, pronunciation and clarity. If you cannot hear au
 environment, say so - text review, completion metadata and listening are different checks.
 
 For Skaldkeep, store approved lyrics as a `kind="song"` recap (`upsert_recap`), reusing the
-`recap_id` on updates. Audio is uploaded by a human in the web app.
+`recap_id` on updates. To attach audio (e.g. a Suno or ElevenLabs file the user provides), upload it with `create_media_upload` (shell) or `import_media_from_url` (public https link), then pass the returned `id` as `audio_media_id`. On older servers without these tools, a human uploads the audio in the web app.
 
 This guide concerns suno.com and help.suno.com; look-alike domains are unrelated products.

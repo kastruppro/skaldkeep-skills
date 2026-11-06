@@ -7,8 +7,8 @@ description: >-
   sang", "lav sange til sessionen", "write the recap song", "song concepts for session 12",
   "Suno prompt", "revise the lyrics", "mashup of our two songs", or answers yes to "Should we
   make songs for this session?". Covers lyric review so an absent player can follow the story,
-  model comparison and revisions. Audio is generated in Suno and uploaded by a human in the
-  Skaldkeep web app; this skill only stores the text.
+  model comparison and revisions. Audio is generated in Suno; when the user hands over the
+  file or a link, the skill can upload it and attach it to the recap.
 license: MIT
 ---
 
@@ -80,8 +80,9 @@ upsert_recap(campaign_slug=<ref>, session_slug="session-12", kind="song",
 ```
 
 Pass `recap_id` to update an existing song instead of creating a duplicate. The recap stays
-hidden while its session document is unpublished. Tell the user to upload the audio on the
-session page in the web app.
+hidden while its session document is unpublished.
+
+To attach audio (e.g. a Suno or ElevenLabs file the user provides), upload it with `create_media_upload` (shell) or `import_media_from_url` (public https link), then pass the returned `id` as `audio_media_id`. On older servers without these tools, a human uploads the audio in the web app.
 
 ## Rules
 
