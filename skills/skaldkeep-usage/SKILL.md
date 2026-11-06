@@ -67,6 +67,9 @@ Settings > Access tokens and kept in the `SKALDKEEP_TOKEN` environment variable.
 | Quest-board metadata (status, priority, next step, progress, ...) | `update_quests` |
 | One frontmatter field across many docs | `normalize_facet_values` (see **skaldkeep-facet-cleanup**) |
 | Change a slug | `rename_document` - rewrites every `[[link]]`, keeps the old slug as an alias |
+| Two pages are the same thing | copy unique facts into the survivor, then `merge_documents` - old name and slug become aliases, links rewritten, duplicate trashed. Not staged: only when the user asks |
+| Delete a page | `delete_document` (trash, 30 days). Not staged: only when the user asks |
+| Set a page's picture (any type) | `set_document_image` |
 | PC leaves, dies, returns | `archive_pc` / `revive_pc` - staged proposal; never on your own initiative |
 
 A conflict error on `base_revision_id` means the document changed since you read it: read it

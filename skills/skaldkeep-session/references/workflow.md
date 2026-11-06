@@ -81,10 +81,11 @@ Run this for every processed session, as its own pass after the transcript is re
    not just new items.
 4. **Not a real quest.** If the session shows something on the board was never a quest (a
    rumor, a flavour hook, a duplicate of another quest, something the DM clarified was
-   nothing), do not leave it open. MCP has no delete tool: set `status: abandoned` with
-   `update_quests`, add a one-line reason under `Progress` (`Session 12: not a real quest,
-   it was only a rumor`), and in the report tell the DM they can delete the page in the web
-   app if they want it gone. A duplicate: merge anything useful into the surviving quest first.
+   nothing), do not leave it open: set `status: abandoned` with `update_quests`, add a one-line
+   reason under `Progress` (`Session 12: not a real quest, it was only a rumor`), and in the
+   report offer to delete it. A duplicate (also of an NPC or any other page): fold anything
+   useful into the surviving page first, then propose `merge_documents`. Deleting and merging
+   are NOT staged - call `delete_document` / `merge_documents` only after the DM says yes.
 5. Batch every change under the same `batch_label` as the rest of the session so the DM
    reviews it together.
 

@@ -1,7 +1,7 @@
 # Document type schemas (frontmatter conventions)
 
 Snapshot of the Skaldkeep server's per-type schemas (the same source as `get_type_schema` and
-`GET /api/document-types`), checked 2026-11-04 against server 0.2.9. Frontmatter is free-form: these keys are
+`GET /api/document-types`), checked 2026-11-06 against the server after 0.2.11. Frontmatter is free-form: these keys are
 conventions the UI understands, not a closed schema, and unknown keys are kept. Always call
 `get_type_schema(type)` on the connected server before the first write of a type - it wins
 whenever it differs from this file.
@@ -12,6 +12,7 @@ whenever it differs from this file.
 - frontmatter is free-form YAML/JSON; the keys below are conventions the UI understands, not a closed schema. Unknown keys are kept verbatim.
 - aliases: list of alternative names for link resolution and search.
 - tags: list of free-form tags.
+- portrait: every type has a picture field (uploaded image filename shown as the page's picture - portrait or illustration). Set it with `set_document_image`.
 - dm_notes is a SEPARATE field (not frontmatter), never visible to players; reading or writing it requires the access_dm_notes capability (the DM's alone - a scribe never sees it).
 - visibility: 'player' (default), 'dm_only' (hidden from players entirely; requires write_dm_content) or 'personal' (private to the author and their chosen audience; requires write_own_notes and cannot change later).
 
@@ -47,7 +48,7 @@ Facets: status. Badges: -.
 | `family` | family/house name or slug, if relevant |  |
 | `first_met` | session number or YYYY-MM-DD |  |
 | `last_seen` | session number or YYYY-MM-DD |  |
-| `portrait` | uploaded image filename used as the NPC portrait |  |
+| `portrait` | uploaded image filename shown as this page's picture (portrait or illustration); set it with `set_document_image` |  |
 
 Facets: prominence, location, faction, family, status, relationship, race. Badges: faction, location.
 
