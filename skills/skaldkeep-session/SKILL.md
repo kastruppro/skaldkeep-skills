@@ -67,6 +67,8 @@ Issue these together in a single turn - they do not depend on the transcript:
 1. `get_my_access(campaign_slug)` - decides what you may write (`sees_dm_content`,
    `sees_dm_notes`).
 2. `list_documents(campaign_slug)` - the existing slugs (update vs. create, links that resolve).
+   Also `list_documents(campaign_slug, type="quest")` and `type="loot"`: their facets (`status`,
+   `holder`, ...) are the board you reconcile against in Step 4.
 3. `get_npc_overview(campaign_slug)` if available - NPC activity; `suggested_one_off` is
    evidence, never permission to downgrade an NPC.
 4. `get_type_schema(type)` for every type you may write (`session`, `npc`, `location`, `loot`,
@@ -100,6 +102,24 @@ fan out the `get_document` reads in parallel to get each `current_revision_id`. 
 small frontmatter changes use `append_to_document` and skip the read. Entity rules (NPC
 `prominence`/`first_met`/`last_seen`, quests, loot custody, PC lifecycle) are in
 [references/workflow.md](references/workflow.md#entity-rules).
+
+**Quest and loot reconciliation (mandatory, never skip).** Quests and loot are the pages most
+often left stale. After reading the transcript, walk the *whole* existing quest and loot lists
+from Step 2, not just the items you remember from the session, and write down a verdict for each
+open quest and each loot item the session touched:
+
+- **Quests:** did it advance, complete, fail, get abandoned, change `next_step`, `location`,
+  `quest_giver`, `priority` or progress? Was it picked up or offered (`available` -> `active`)?
+  Did the table show it was never a real quest (a passing rumor, a joke, a misunderstanding)?
+  Also look for new quests the session created. Apply changes with `update_quests`; add a
+  dated line under `Progress` with `append_to_document`.
+- **Loot:** was anything gained, lost, sold, given away, used up, identified, moved to a
+  container or location, or attuned? Update `holder`, `owner`, `location`, `container`,
+  `attuned_to`, quantity/charges and `status`, and keep the session's `items_acquired` in sync.
+- Keep the verdicts in your plan, then state the outcome in the Step 7 report, including
+  "checked, no change" for quests and loot you reviewed and left alone.
+
+Details and the "not a real quest" case: [references/workflow.md](references/workflow.md#quest-and-loot-reconciliation).
 
 ## Step 5 - Write everything, staged, in one batch
 
@@ -144,7 +164,8 @@ uploaded by a human in the web app.
    the transcript and copies `played_on` into the page's `date`. Skip only if you stopped
    before writing the session document.
 2. `list_staging(campaign_slug)` - tell the user exactly which documents wait in the batch and
-   that the DM publishes it in the web app's **Review** tab. Publish yourself
+   that the DM publishes it in the web app's **Review** tab. Include a short quest and loot
+   section: what changed, what was retired as not a real quest, what you checked and left alone. Publish yourself
    (`publish_staging_batch`) only on an explicit request.
 3. If a PC left, died or returned, you may stage `archive_pc` / `revive_pc` as a proposal and
    say so. Never archive a PC on your own initiative.

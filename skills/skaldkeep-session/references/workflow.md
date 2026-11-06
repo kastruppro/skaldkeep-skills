@@ -67,6 +67,27 @@ Personally owned gear is `item_role: personal` + `owner: <pc-slug>`, still `visi
 player`. Use `importance: minor` for incidental items. `get_loot_history` shows past custody
 changes when you need to check them.
 
+### Quest and loot reconciliation
+
+Run this for every processed session, as its own pass after the transcript is read.
+
+1. List all quests (`list_documents(type="quest")`) and loot (`type="loot"`). Ignore terminal
+   quests unless the session reopens them.
+2. For each open quest, find the transcript evidence for or against it: progress, completion,
+   failure, a new lead, a changed giver or place, a deadline. No evidence means no change, but
+   note it as checked.
+3. For each item the session mentions, find who ends the session holding it and where it is
+   stored. Items sold, given away, destroyed or consumed need their status and holder updated,
+   not just new items.
+4. **Not a real quest.** If the session shows something on the board was never a quest (a
+   rumor, a flavour hook, a duplicate of another quest, something the DM clarified was
+   nothing), do not leave it open. MCP has no delete tool: set `status: abandoned` with
+   `update_quests`, add a one-line reason under `Progress` (`Session 12: not a real quest,
+   it was only a rumor`), and in the report tell the DM they can delete the page in the web
+   app if they want it gone. A duplicate: merge anything useful into the surviving quest first.
+5. Batch every change under the same `batch_label` as the rest of the session so the DM
+   reviews it together.
+
 ### PCs
 
 - A player may edit their own PC page only if the DM allows it; do not rewrite other players'
