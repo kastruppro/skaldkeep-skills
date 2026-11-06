@@ -12,7 +12,7 @@ whenever it differs from this file.
 - frontmatter is free-form YAML/JSON; the keys below are conventions the UI understands, not a closed schema. Unknown keys are kept verbatim.
 - aliases: list of alternative names for link resolution and search.
 - tags: list of free-form tags.
-- portrait: every type has a picture field (uploaded image filename shown as the page's picture - portrait or illustration). Set it with `set_document_image`.
+- portrait: every type has a picture field (uploaded image filename shown as the page's picture - portrait or illustration). Since 0.3.1 it is also the page's half-transparent backdrop and its thumbnail in every overview, so pick an image that reads well small and large (subject centred). Set it with `set_document_image`.
 - dm_notes is a SEPARATE field (not frontmatter), never visible to players; reading or writing it requires the access_dm_notes capability (the DM's alone - a scribe never sees it).
 - visibility: 'player' (default), 'dm_only' (hidden from players entirely; requires write_dm_content) or 'personal' (private to the author and their chosen audience; requires write_own_notes and cannot change later).
 
