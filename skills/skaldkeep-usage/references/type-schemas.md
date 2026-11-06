@@ -1,7 +1,7 @@
 # Document type schemas (frontmatter conventions)
 
 Snapshot of the Skaldkeep server's per-type schemas (the same source as `get_type_schema` and
-`GET /api/document-types`), checked 2026-11-06 against the server after 0.2.11. Frontmatter is free-form: these keys are
+`GET /api/document-types`), checked 2026-11-06 against server 0.3.0. Frontmatter is free-form: these keys are
 conventions the UI understands, not a closed schema, and unknown keys are kept. Always call
 `get_type_schema(type)` on the connected server before the first write of a type - it wins
 whenever it differs from this file.

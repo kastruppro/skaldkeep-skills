@@ -11,7 +11,7 @@ exactly as they do in the web app. Denied calls name the missing capability. A t
 scoped to one campaign or left unscoped (all campaigns); an out-of-scope `campaign_slug`
 resolves as not-found.
 
-> Snapshot of the Skaldkeep server's tool definitions (49 tools, checked 2026-11-06 against the server after 0.2.11). Treat the
+> Snapshot of the Skaldkeep server's tool definitions (49 tools, checked 2026-11-06 against server 0.3.0). Treat the
 > live server's instructions and each tool's own description as authoritative if they differ,
 > and use only the tools the connected server actually lists - a self-hosted instance may be older.
 
