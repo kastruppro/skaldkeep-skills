@@ -1,5 +1,7 @@
 # Skaldkeep skills
 
+![License](https://img.shields.io/badge/License-MIT-green)
+
 Agent skills for [Skaldkeep](https://app.skaldkeep.gg), the campaign chronicle for tabletop RPG
 groups. They teach an AI agent to work with a campaign through Skaldkeep's built-in MCP server:
 turn a session transcript into staged campaign documents, transcribe recordings, write recap
