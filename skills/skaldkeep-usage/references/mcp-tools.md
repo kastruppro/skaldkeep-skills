@@ -11,7 +11,7 @@ exactly as they do in the web app. Denied calls name the missing capability. A t
 scoped to one campaign or left unscoped (all campaigns); an out-of-scope `campaign_slug`
 resolves as not-found.
 
-> Snapshot of the Skaldkeep server's tool definitions (49 tools, checked 2026-11-06 against server 0.3.0). Treat the
+> Snapshot of the Skaldkeep server's tool definitions (49 tools, checked 2026-11-06 against server 0.3.2). Treat the
 > live server's instructions and each tool's own description as authoritative if they differ,
 > and use only the tools the connected server actually lists - a self-hosted instance may be older.
 
@@ -27,7 +27,7 @@ resolves as not-found.
 
 | Tool | Kind | Purpose |
 |------|------|---------|
-| `list_documents(campaign_slug, type=None)` | read | Document summaries, optionally filtered by type. Includes schema-driven `facets` and rich-card `card_fields` without sending complete frontmatter. |
+| `list_documents(campaign_slug, type=None)` | read | Document summaries, optionally filtered by type. Includes schema-driven `facets` and rich-card `card_fields` without sending complete frontmatter. Locations, NPCs, quests, loot and factions carry `location_path` (root first; for a location its ancestors, otherwise the path down to its `location`); hidden levels are left out for tokens that cannot see them. |
 | `get_npc_overview(campaign_slug)` | read | Visibility-safe NPC activity: appearance and incoming-link counts, whether each NPC appeared in the five latest visible sessions, last visible session (`last_session_slug`/`last_session_title`, plus `last_session_order` = its position among the visible sessions, for sorting), and a conservative `suggested_one_off` signal. |
 | `get_document(campaign_slug, slug, draft=False)` | read | Full document: frontmatter, body, `current_revision_id` (needed for updates), and `dm_notes` only when the token holds `access_dm_notes` (the DM's alone; a co-DM scribe reads hidden documents but never the `dm_notes` field). `draft=True` reads the pending staged content (needs `write_player_content`) and adds `has_pending_draft`, `draft_revision_id` (null when there is no draft), `base_revision_id` and `stale` (the live page moved on since the draft was made); on a published page without a draft it errors with "document has no pending draft". |
 | `get_loot_history(campaign_slug, slug)` | read | Revision-derived public inventory changes for one loot document, newest first. Covers custody, ownership, storage, container, attunement, quantity/charges, related quest and status; never returns bodies, `dm_notes`, arbitrary frontmatter or authors. Pending drafts are visible only with `write_dm_content`. |

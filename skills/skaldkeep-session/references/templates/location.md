@@ -11,7 +11,7 @@ Maps to a Skaldkeep **`location`** document.
 | `region` | parent region / city |
 | `location_type` | `city` \| `village` \| `dungeon` \| `building` \| `landmark` \| `plane` |
 | `status` | `active` \| `destroyed` \| `abandoned` \| `unknown` |
-| `parent_location` | location slug of the direct parent (e.g. the building a room is in) |
+| `parent_location` | **slug** of the direct parent location (e.g. the city a district is in) - builds the location tree; create or link the parent so it resolves. Leave `region` empty unless it should differ from the top ancestor. |
 | `first_visited` | session number |
 | `last_visited` | session number |
 

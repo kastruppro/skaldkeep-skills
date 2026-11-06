@@ -1,7 +1,7 @@
 # Document type schemas (frontmatter conventions)
 
 Snapshot of the Skaldkeep server's per-type schemas (the same source as `get_type_schema` and
-`GET /api/document-types`), checked 2026-11-06 against server 0.3.0. Frontmatter is free-form: these keys are
+`GET /api/document-types`), checked 2026-11-06 against server 0.3.2. Frontmatter is free-form: these keys are
 conventions the UI understands, not a closed schema, and unknown keys are kept. Always call
 `get_type_schema(type)` on the connected server before the first write of a type - it wins
 whenever it differs from this file.
@@ -58,10 +58,10 @@ Facets: prominence, location, faction, family, status, relationship, race. Badge
 
 | key | hint | values |
 |-----|------|--------|
-| `region` | broader area, e.g. Neverwinter Region |  |
+| `region` | optional label; when empty the region is derived from the top ancestor in the location tree |  |
 | `location_type` | city \| village \| dungeon \| building \| landmark \| plane |  |
 | `status` | active \| destroyed \| abandoned \| unknown |  |
-| `parent_location` | slug of the containing location, if any |  |
+| `parent_location` | **slug** (or alias) of the containing location - builds the location tree (any depth: region > city > district > building, or planes/areas). Never a title: a title resolves to nothing and the place becomes a root. |  |
 | `first_visited` | session number or YYYY-MM-DD |  |
 | `last_visited` | session number or YYYY-MM-DD |  |
 | `map_x` | campaign-map pin, horizontal fraction 0.0-1.0 |  |
