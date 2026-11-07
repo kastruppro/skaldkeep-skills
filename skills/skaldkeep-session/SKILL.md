@@ -97,7 +97,7 @@ per chunk, then merge their notes in chronological order yourself.
 ## Step 4 - Plan the touched documents
 
 List every document the session touches: the session note plus each NPC, location, item,
-quest, PC and faction that is new or changed. For existing documents you will fully rewrite,
+quest, PC, companion and faction that is new or changed. For existing documents you will fully rewrite,
 fan out the `get_document` reads in parallel to get each `current_revision_id`. For appends and
 small frontmatter changes use `append_to_document` and skip the read. Entity rules (NPC
 `prominence`/`first_met`/`last_seen`, quests, loot custody, PC lifecycle) are in
@@ -130,6 +130,7 @@ with the same label. Keep `publish=false`.
 | Artifact | Target | Template |
 |----------|--------|----------|
 | Session note | `session` document | [session-note](references/templates/session-note.md) |
+| Companions | new familiar/mount/steed/pet via `add_companion` (same `batch_label`); changes via the normal writes | - |
 | Entity pages | `npc`, `location`, `loot`, `quest`, `pc`, `faction` | [npc](references/templates/npc.md), [location](references/templates/location.md), [loot](references/templates/loot.md), [quest](references/templates/quest.md), [pc](references/templates/pc.md), [faction](references/templates/faction.md) |
 | "Previously On" | `narration` recap via `upsert_recap` | [previously-on](references/templates/previously-on.md) |
 | Context summary / detailed | local file, or a `personal` `note` | [context-summary](references/templates/context-summary.md), [context-detailed](references/templates/context-detailed.md) |
@@ -156,7 +157,8 @@ upsert_recap(campaign_slug=<ref>, session_slug="session-12", kind="narration",
 ```
 
 Recaps are not staged but stay hidden until the session document is published. Audio is
-uploaded by a human in the web app.
+uploaded by a human in the web app. The recap's cover is the session page's `portrait`, so do
+not pass `cover` unless the user gives a separate image.
 
 ## Step 7 - Close the loop and report
 

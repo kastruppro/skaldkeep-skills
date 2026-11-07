@@ -84,6 +84,10 @@ hidden while its session document is unpublished.
 
 To attach audio (e.g. a Suno or ElevenLabs file the user provides), upload it with `create_media_upload` (shell) or `import_media_from_url` (public https link), then pass the returned `id` as `audio_media_id`. On older servers without these tools, a human uploads the audio in the web app.
 
+The song's cover defaults to the session page's `portrait`. For its own cover art (e.g. a Suno
+song image), upload the image and pass the returned **filename** as `cover`; `cover=""` goes
+back to the session picture.
+
 ## Rules
 
 - Comprehension and fidelity before style. No invented events, causes or certainties.

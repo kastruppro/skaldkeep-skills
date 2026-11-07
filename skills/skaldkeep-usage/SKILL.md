@@ -2,8 +2,8 @@
 name: skaldkeep-usage
 description: >-
   How to read and write a Skaldkeep campaign correctly through its MCP tools. Use whenever you
-  work with Skaldkeep documents, NPCs, locations, quests, loot, PCs, recaps, snapshots or
-  staging, e.g. "add this NPC to Skaldkeep", "update the quest", "what changed since last
+  work with Skaldkeep documents, NPCs, locations, quests, loot, PCs, companions, recaps,
+  snapshots, staging or the play schedule, e.g. "add this NPC to Skaldkeep", "update the quest", "what changed since last
   session", "publish the batch", "hide this from the players", "opdater kampagnen", "find X in
   Skaldkeep", or before any upsert_document, upsert_documents, append_to_document,
   publish_staging_batch or create_campaign_snapshot call. Explains owner/slug addressing,
@@ -70,6 +70,7 @@ Settings > Access tokens and kept in the `SKALDKEEP_TOKEN` environment variable.
 | Two pages are the same thing | copy unique facts into the survivor, then `merge_documents` - old name and slug become aliases, links rewritten, duplicate trashed. Not staged: only when the user asks |
 | Delete a page | `delete_document` (trash, 30 days). Not staged: only when the user asks |
 | Set a page's picture (any type) | `set_document_image` - it is also the page backdrop and the overview thumbnail |
+| Give a PC a familiar, mount, steed or pet | `add_companion` - SRD template (`list_companion_templates`) or blank; `owner` = the PC slug; staged |
 | PC leaves, dies, returns | `archive_pc` / `revive_pc` - staged proposal; never on your own initiative |
 
 A conflict error on `base_revision_id` means the document changed since you read it: read it
@@ -121,8 +122,11 @@ another batch, or a `stale` one, must be reviewed in the web app first.
 - Media (images, audio, PDF, MP4/WebM video, max 50 MB): `upload_media` (base64) for small
   files; `create_media_upload` + `curl -T` with a shell, or `import_media_from_url` without one,
   for anything larger. Embed `![[<returned filename>]]` - a name collision returns a different
-  filename. Attach recap audio with `upsert_recap(audio_media_id=...)`. Read media with
+  filename. Attach recap audio with `upsert_recap(audio_media_id=...)`; a recap's cover is the
+  session page's `portrait` unless `upsert_recap(cover=<image filename>)` sets its own. Read media with
   `list_media` / `get_media` (signed download links).
+- "When do we play next / who is away?": `get_play_schedule` (read-only; the schedule itself
+  is edited in the web app).
 - Bodies use H2 sections (`## Summary`, `## Events`); the app builds navigation from them.
 - Use plain hyphens rather than em/en dashes in text you write.
 - Use only tools the connected server lists. A missing tool means an older server: do the

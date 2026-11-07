@@ -99,6 +99,17 @@ Run this for every processed session, as its own pass after the transcript is re
   or `revive_pc`, staged. The cascade only pauses or resumes the PC's open personal quests.
   Never archive autonomously.
 
+### Companions
+
+- A familiar, beast companion, steed, mount or pet bound to a PC is a `companion` document,
+  not an NPC or loot. New one: `list_companion_templates` for a standard SRD statblock (it
+  follows the campaign `ruleset`), then `add_companion(pc_slug, name, template_key=...,
+  batch_label=<this run's label>)`; no matching template means a blank one with `kind`.
+- `owner` is the PC's slug. Changes (hp, a new trick, death) go through `append_to_document`
+  or `upsert_document`; keep `statblock` an object with integer ability scores.
+- Only create one when the transcript shows it belongs to a PC; a passing animal is not a
+  companion.
+
 ### Bodies and replacements
 
 - Append-only narrative changes: `append_to_document`.

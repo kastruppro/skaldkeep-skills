@@ -1,7 +1,7 @@
 # Document type schemas (frontmatter conventions)
 
 Snapshot of the Skaldkeep server's per-type schemas (the same source as `get_type_schema` and
-`GET /api/document-types`), checked 2026-11-06 against server 0.3.2. Frontmatter is free-form: these keys are
+`GET /api/document-types`), checked 2026-11-07 against server 0.4.0. Frontmatter is free-form: these keys are
 conventions the UI understands, not a closed schema, and unknown keys are kept. Always call
 `get_type_schema(type)` on the connected server before the first write of a type - it wins
 whenever it differs from this file.
@@ -12,7 +12,7 @@ whenever it differs from this file.
 - frontmatter is free-form YAML/JSON; the keys below are conventions the UI understands, not a closed schema. Unknown keys are kept verbatim.
 - aliases: list of alternative names for link resolution and search.
 - tags: list of free-form tags.
-- portrait: every type has a picture field (uploaded image filename shown as the page's picture - portrait or illustration). Since 0.3.1 it is also the page's half-transparent backdrop and its thumbnail in every overview, so pick an image that reads well small and large (subject centred). Set it with `set_document_image`.
+- portrait: every type has a picture field (uploaded image filename shown as the page's picture - portrait or illustration). Since 0.3.1 it is also the page's half-transparent backdrop and its thumbnail in every overview, so pick an image that reads well small and large (subject centred). Set it with `set_document_image`. Since 0.4.0 a page without `portrait` uses the first image embedded in its body (never one from `dm_notes`), and a session's picture is also the default cover of its recaps.
 - dm_notes is a SEPARATE field (not frontmatter), never visible to players; reading or writing it requires the access_dm_notes capability (the DM's alone - a scribe never sees it).
 - visibility: 'player' (default), 'dm_only' (hidden from players entirely; requires write_dm_content) or 'personal' (private to the author and their chosen audience; requires write_own_notes and cannot change later).
 
@@ -151,6 +151,25 @@ Facets: status. Badges: class.
 
 - The player dashboard renders conditions/curses/abilities as chips: keep each entry a SHORT string (details belong in the body) and update them when processing a session so the dashboard stays current.
 - Loot held by this PC is found via the loot documents' holder field (this PC's slug) - don't duplicate an inventory here.
+
+## `companion` - A companion bound to one character: familiar, beast companion, steed, mount or pet.
+
+| key | hint | values |
+|-----|------|--------|
+| `owner` | **slug** of the PC this companion belongs to (never a display name, so renames and merges follow) |  |
+| `kind` | what sort of companion it is | `familiar` \| `beast_companion` \| `steed` \| `mount` \| `pet` \| `other` |
+| `ruleset` | rules edition the statblock follows; unset shows both | `dnd5e-2014` \| `dnd5e-2024` |
+| `template` | source template, e.g. `srd52-owl` (info only) |  |
+| `summary` | one or two sentences shown on the character page |  |
+| `statblock` | object with size, creature_type, alignment, ac, ac_note, hp, hp_dice, speed (text, e.g. '10 ft., fly 60 ft.'), abilities (str, dex, con, int, wis, cha as integers), saves, skills, senses, languages, cr, traits and actions (lists of {name, text}) and optionally reactions |  |
+| `portrait` | uploaded image filename shown as this page's picture; set it with `set_document_image` |  |
+
+Facets: kind, ruleset, owner. Badges: kind.
+
+- Create companions with `add_companion` (copies an SRD template from `list_companion_templates`, or a blank one); edit them with the normal document tools.
+- The statblock is validated on write: it must be an object, ability scores integers 1-30, traits/actions/reactions lists of at most 50 `{name, text}` entries. Unknown keys survive.
+- A companion takes its PC's visibility; one of a `dm_only` PC is hidden from players.
+- The campaign setting `ruleset` (`dnd5e-2014` / `dnd5e-2024` / unset) picks the default edition for templates; `get_my_access` and `list_campaigns` report it.
 
 ## `note` - Anything that fits no other type: lore, rules, handouts.
 
